@@ -1,0 +1,33 @@
+class CQueue {
+    Stack st1 = new Stack();
+    Stack st2 = new Stack();
+    public CQueue() {
+
+    }
+    
+    public void appendTail(int value) {
+        st1.push(value);
+    }
+    
+    public int deleteHead() {
+        
+        if (st2.isEmpty() && st1.isEmpty())
+            return -1;
+        if (st2.isEmpty()){
+            while (!st1.isEmpty()){
+                st2.push(st1.pop());
+            }
+        }
+        
+        return (int)st2.pop();
+        
+
+    }
+}
+
+/**
+ * Your CQueue object will be instantiated and called as such:
+ * CQueue obj = new CQueue();
+ * obj.appendTail(value);
+ * int param_2 = obj.deleteHead();
+ */
