@@ -1,0 +1,31 @@
+//采用dfs 回溯法 递归解决
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        if (board == null || board.length == 0 || board[0].length == 0)
+            return false;
+        char []w = word.toCharArray();
+        int i = 0, j = 0, k = 0;
+        
+       
+            for (; j < board.length; j++)
+                for (k = 0; k < board[0].length; k++){
+                    if (dfs( w, board, i, j ,k)) return true;
+                        
+                    
+                }
+        return false;
+        
+
+    }
+    public boolean dfs(char []w, char [][]board ,int i, int j, int k){
+        if ( j < 0 || j >= board.length || k < 0 || k >= board[0].length || board[j][k] != w[i])
+            return false;
+        if (i == w.length - 1)
+            return true;
+        board[j][k] = '\0';
+        boolean res = dfs (w, board, i+1, j+1, k) || dfs(w, board, i+1, j, k+1) || dfs(w, board, i+1, j-1, k) || dfs(w, board, i+1, j, k-1);
+        board[j][k] = w[i];
+        return res;
+    }
+
+}
