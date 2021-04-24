@@ -1,0 +1,35 @@
+class Solution {
+    int r = 0;
+    
+    public int movingCount(int m, int n, int k) {
+        if ( m == 0 && n== 0)
+            return 0;
+        if ( k == 0)
+            return 1;
+
+        boolean [][]v = new boolean[m][n];
+        find(0, 0, k, m, n, v);
+
+        return r;       
+    }
+
+    public int sum(int k){
+        int s = 0;
+        while (k > 0){
+            s += k % 10;
+            k = k / 10;
+        }
+        return s;
+    }
+
+    public boolean find (int a, int b, int c, int m, int n, boolean [][]v){
+        if (a == m || b == n || sum(a) + sum(b) > c || v[a][b])
+            return false;
+        r++;
+        v[a][b] = true;
+       
+        boolean dfs = find(a+1, b, c, m, n, v) ||  find(a, b+1, c, m, n, v) ;
+        
+        return dfs;
+    }
+}
